@@ -1,0 +1,26 @@
+# Logs
+*.log
+
+# Dependencies
+node_modules
+
+# Trash
+.DS_Store
+.idea
+.vscode
+
+# Coverage generated files
+coverage
+.nyc_output
+
+# Dynamically processed files
+i18n
+
+# Environment variables
+.env
+
+build
+dist
+
+# git
+.githooks
