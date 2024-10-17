@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-REPO="grequenaruil_meli/jumper-tool"
+REPO="GastonRR/jumper-tool"
 TAG="latest"
 
 # Determinar la arquitectura de la máquina
