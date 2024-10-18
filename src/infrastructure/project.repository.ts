@@ -9,6 +9,16 @@ import { ProjectError } from '@/domain/error';
 export class InMemoryProjectRepository implements ProjectRepository {
   private configFilePath = path.join(os.homedir(), '.config', 'portal', 'config.json');
 
+  constructor() {
+    this.init();
+  }
+
+  async init() {
+    if (!existsSync(this.configFilePath)) {
+      await promises.writeFile(this.configFilePath, JSON.stringify([]));
+    }
+  }
+
   public async list(basePath: string): Promise<Project[]> {
     const fixedPath = this.fixPath(basePath);
     const projects: Project[] = [];
@@ -49,7 +59,7 @@ export class InMemoryProjectRepository implements ProjectRepository {
   private async processDirectory(directory: string): Promise<Project | null> {
     try {
       const infoPath = statSync(directory);
-   
+
       let project: Project | null = null;
 
       if (infoPath.isDirectory() && this.isGitRepository(directory)) {
