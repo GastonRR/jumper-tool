@@ -1,9 +1,5 @@
 # Jumper Tool
 
-> Jumper is a tool to jump between projects
-
-# Jumper Tool
-
 `Jumper` is a command line interface (CLI) tool created to move between git projects in a more fun and easy way, inspired by console aliases
 
 ## Features
@@ -45,7 +41,7 @@ or
 jump <tag>
 ```
 
-Example:
+#### Example:
 
 ```bash
 jumper init
