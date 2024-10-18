@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p release
-          cp dist/* release/
+          cp -r dist/* release/
           cd release
           tar -czf ../jumper-${{ matrix.arch }}.tar.gz *
           cd ..
