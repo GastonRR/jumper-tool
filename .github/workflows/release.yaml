@@ -39,13 +39,13 @@ jobs:
       - name: List dist directory after pkg
         run: ls -la dist
 
-      - name: Package Binary
+      - name: Rename and Package Binary
         shell: bash
         run: |
           mkdir -p release
-          cp -r dist/* release/
+          mv dist/jumper-${{ matrix.arch }} release/jumper
           cd release
-          tar -czf ../jumper-${{ matrix.arch }}.tar.gz *
+          tar -czf ../jumper-${{ matrix.arch }}.tar.gz jumper
           cd ..
           echo "ASSET_PATH=jumper-${{ matrix.arch }}.tar.gz" >> $GITHUB_ENV
 
