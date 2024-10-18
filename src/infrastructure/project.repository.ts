@@ -18,11 +18,9 @@ export class InMemoryProjectRepository implements ProjectRepository {
 
     if (!existsSync(configDir)) {
       await promises.mkdir(configDir, { recursive: true });
-      console.log(`Creating config directory at ${configDir}`);
     }
 
     if (!existsSync(this.configFilePath)) {
-      console.log('Creating config file');
       await promises.writeFile(this.configFilePath, JSON.stringify([]));
     }
   }
