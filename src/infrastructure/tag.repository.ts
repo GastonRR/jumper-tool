@@ -6,13 +6,21 @@ import { TagError } from '@/domain/error';
 
 export class ConfigTagRepository implements TagRepository {
   private configFilePath = path.join(os.homedir(), '.config', 'portal', 'config.json');
-  
+
   constructor() {
     this.init();
   }
 
   async init() {
+    const configDir = path.dirname(this.configFilePath);
+
+    if (!existsSync(configDir)) {
+      await promises.mkdir(configDir, { recursive: true });
+      console.log(`Creating config directory at ${configDir}`);
+    }
+
     if (!existsSync(this.configFilePath)) {
+      console.log('Creating config file');
       await promises.writeFile(this.configFilePath, JSON.stringify([]));
     }
   }
