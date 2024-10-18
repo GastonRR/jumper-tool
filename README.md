@@ -36,15 +36,19 @@ source ~/.zshrc
 The basic syntax for using `Jumper` is:
 
 ```bash
-jumper [options] [command]
-or
+jumper init
+```
+
+This command will init all configurations that jumper needs
+
+```bash
+jumper scan
+```
+
+This command will scan on the current path if exist some untagged github project
+
+```bash
 jump <tag>
 ```
 
-#### Example:
-
-```bash
-jumper init
-or
-jump example
-```
+This command will move it to the directory associated with the tag
