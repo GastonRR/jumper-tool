@@ -15,9 +15,6 @@ jobs:
       matrix:
         arch: [x64, arm64]
 
-    outputs:
-      artifact_name: ${{ matrix.arch }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -63,10 +60,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download release assets
+      - name: Download x64 release asset
         uses: actions/download-artifact@v3
         with:
-          name: jumper-${{ needs.build.outputs.artifact_name }}
+          name: jumper-x64
+          path: .
+
+      - name: Download arm64 release asset
+        uses: actions/download-artifact@v3
+        with:
+          name: jumper-arm64
           path: .
 
       - name: Get commit messages
