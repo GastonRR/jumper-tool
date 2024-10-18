@@ -7,8 +7,8 @@ import { TagService } from '@/application/service/tag.service';
 import { ProjectService } from '@/application/service/project.service';
 import { CLI } from '@/bin/cli';
 
-const projectRepository = new InMemoryProjectRepository();
 const tagRepository = new ConfigTagRepository();
+const projectRepository = new InMemoryProjectRepository();
 
 const tagService = new TagService(tagRepository);
 const projectService = new ProjectService(projectRepository);
