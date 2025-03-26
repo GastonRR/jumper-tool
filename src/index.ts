@@ -24,7 +24,7 @@ const program = new Command();
 
 program
   .name('jumper')
-  .version('0.0.1')
+  .version('1.0.0')
   .description('Jumper is a tool to jump between projects')
   .usage(`[options] [command] 
        jump <tag> to jump to a project
