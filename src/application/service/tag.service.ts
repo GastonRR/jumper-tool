@@ -1,5 +1,5 @@
 import { TagError } from '@/domain/error';
-import { Tag, TagRepository, TagUpdate } from '@/domain/tag';
+import { Tag, TagRepository } from '@/domain/tag';
 
 export class TagService {
   private tagRepository: TagRepository;
@@ -41,7 +41,7 @@ export class TagService {
     await this.tagRepository.delete(project);
   }
 
-  async updateTag(project: string, tag: TagUpdate): Promise<void> {
+  async updateTag(project: string, tag: string): Promise<void> {
     await this.tagRepository.update(project, tag);
   }
 

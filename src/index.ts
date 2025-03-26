@@ -79,6 +79,22 @@ program
     }
   });
 
+program
+  .command('tag-update <project> <tag>')
+  .description('Update a checkpoint tag with project name and new name tag, if you dont know the project name you can use the list command')
+  .action(async (project, tag) => {
+    try {
+      await cli.updateTag(project, tag);
+      process.exit(0);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log('Unknown error');
+      }
+      process.exit(1);
+    }
+  });
 
 program
   .command('scan')

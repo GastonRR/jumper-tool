@@ -1,7 +1,7 @@
 import { existsSync, promises } from 'fs';
 import path from 'path';
 import os from 'os';
-import { Tag, TagKeys, TagRepository, TagUpdate } from '@/domain/tag';
+import { Tag, TagKeys, TagRepository } from '@/domain/tag';
 import { TagError } from '@/domain/error';
 
 export class ConfigTagRepository implements TagRepository {
@@ -54,8 +54,14 @@ export class ConfigTagRepository implements TagRepository {
     await promises.writeFile(this.configFilePath, JSON.stringify(newTags));
   }
 
-  async update(project: string, tag: TagUpdate): Promise<void> {
+  async update(project: string, tag: string): Promise<void> {
     const tags = await this.list();
+
+    console.log({
+      tags,
+      project,
+      tag,
+    });
 
     const tagIndex = tags.findIndex((t) => t.project === project);
 
@@ -65,7 +71,7 @@ export class ConfigTagRepository implements TagRepository {
 
     const newTags = [
       ...tags.slice(0, tagIndex),
-      { ...tags[tagIndex], ...tag },
+      { ...tags[tagIndex], name: tag },
       ...tags.slice(tagIndex + 1),
     ];
 

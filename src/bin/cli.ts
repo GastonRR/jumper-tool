@@ -14,6 +14,7 @@ import { AddMultipleTagsCommand } from '@/application/command/add-multiple-tags.
 import { UpdateToolCommand } from '@/application/command/update-tool-command';
 import { GithubPort } from '@/domain/github';
 import { SystemPort } from '@/domain/system';
+import { UpdateTagCommand } from '@/application/command/update-tag.command';
 
 
 export class CLI {
@@ -23,6 +24,7 @@ export class CLI {
   private scanProjectCommand: ScanProjectCommand;
   private listTagsCommand: ListTagCommand;
   private updateToolCommand: UpdateToolCommand;
+  private updateTagCommand: UpdateTagCommand;
 
   constructor(projectService: ProjectService, tagService: TagService, githubService: GithubPort, systemService: SystemPort) {
     this.addTagCommand = new AddTagCommand(tagService, projectService);
@@ -31,6 +33,7 @@ export class CLI {
     this.scanProjectCommand = new ScanProjectCommand(projectService);
     this.listTagsCommand = new ListTagCommand(tagService);
     this.updateToolCommand = new UpdateToolCommand(systemService, githubService);
+    this.updateTagCommand = new UpdateTagCommand(tagService);
 
   
   }
@@ -62,6 +65,10 @@ export class CLI {
 
   public async addNewTag(name?: string, path?: string): Promise<void> {
     await this.addTagCommand.execute(name, path);
+  }
+
+  public async updateTag(project: string, newTag: string): Promise<void> {
+    await this.updateTagCommand.execute(project, newTag);
   }
 
   public async jumpToProject(tag: string): Promise<void> {
