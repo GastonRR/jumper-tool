@@ -8,6 +8,7 @@ import { ProjectService } from '@/application/service/project.service';
 import { GitHubService } from '@/application/service/github.service';
 import { SystemService } from '@/application/service/system.service';
 import { CLI } from '@/bin/cli';
+import { CURRENT_VERSION } from './utils';
 
 const tagRepository = new ConfigTagRepository();
 const projectRepository = new InMemoryProjectRepository();
@@ -24,7 +25,7 @@ const program = new Command();
 
 program
   .name('jumper')
-  .version('1.0.0')
+  .version(CURRENT_VERSION)
   .description('Jumper is a tool to jump between projects')
   .usage(`[options] [command] 
        jump <tag> to jump to a project
