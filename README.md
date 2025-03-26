@@ -17,7 +17,7 @@ curl -sL https://raw.githubusercontent.com/GastonRR/jumper-tool/main/install.sh 
 
 ### Post-Installation Setup
 
-After installation, you need to source your shell configuration file to use fnc immediately:
+After installation, you need to source your shell configuration file to use jumper-tool immediately:
 
 For Bash users:
 

@@ -36,7 +36,10 @@
   },
   "pkg": {
     "scripts": "dist/**/*.js",
-    "assets": "dist/**/*.json",
+    "assets": [
+      "dist/**/*.json",
+      "package.json"
+    ],
     "targets": [
       "node18-macos-arm64",
       "node18-macos-x64"

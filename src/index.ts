@@ -5,15 +5,20 @@ import { InMemoryProjectRepository } from '@/infrastructure/project.repository';
 import { ConfigTagRepository } from '@/infrastructure/tag.repository';
 import { TagService } from '@/application/service/tag.service';
 import { ProjectService } from '@/application/service/project.service';
+import { GitHubService } from '@/application/service/github.service';
+import { SystemService } from '@/application/service/system.service';
 import { CLI } from '@/bin/cli';
 
 const tagRepository = new ConfigTagRepository();
 const projectRepository = new InMemoryProjectRepository();
 
+
 const tagService = new TagService(tagRepository);
 const projectService = new ProjectService(projectRepository);
+const githubService = new GitHubService();
+const systemService = new SystemService();
 
-const cli = new CLI(projectService, tagService);
+const cli = new CLI(projectService, tagService, githubService, systemService);
 
 const program = new Command();
 
@@ -92,6 +97,17 @@ program.command('list').description('List all tags').action(async () => {
     await cli.listTags();
     process.exit(0);
   } catch (error) {
+    console.error('Unhandled error:', error);
+    process.exit(1);
+  }
+});
+
+program.command('update').description('Update jumper').action(async () => {
+  try {
+    await cli.update();
+    process.exit(0);
+  }
+  catch (error) {
     console.error('Unhandled error:', error);
     process.exit(1);
   }

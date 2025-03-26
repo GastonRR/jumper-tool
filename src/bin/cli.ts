@@ -11,6 +11,9 @@ import { JumpToProjectCommand } from '@/application/command/jump-project.command
 import { ScanProjectCommand } from '@/application/command/scan-project.command';
 import { ListTagCommand } from '@/application/command/list-tags.command';
 import { AddMultipleTagsCommand } from '@/application/command/add-multiple-tags.command';
+import { UpdateToolCommand } from '@/application/command/update-tool-command';
+import { GithubPort } from '@/domain/github';
+import { SystemPort } from '@/domain/system';
 
 
 export class CLI {
@@ -19,13 +22,15 @@ export class CLI {
   private addMultipleTagsCommand: AddMultipleTagsCommand;
   private scanProjectCommand: ScanProjectCommand;
   private listTagsCommand: ListTagCommand;
+  private updateToolCommand: UpdateToolCommand;
 
-  constructor(projectService: ProjectService, tagService: TagService) {
+  constructor(projectService: ProjectService, tagService: TagService, githubService: GithubPort, systemService: SystemPort) {
     this.addTagCommand = new AddTagCommand(tagService, projectService);
     this.jumpToProjectCommand = new JumpToProjectCommand(tagService);
     this.addMultipleTagsCommand = new AddMultipleTagsCommand(tagService);
     this.scanProjectCommand = new ScanProjectCommand(projectService);
     this.listTagsCommand = new ListTagCommand(tagService);
+    this.updateToolCommand = new UpdateToolCommand(systemService, githubService);
 
   
   }
@@ -49,6 +54,10 @@ export class CLI {
     } catch (error) {
       throw new Error('Error al escribir configuración');
     }
+  }
+
+  public async update(): Promise<void> {
+    await this.updateToolCommand.execute();
   }
 
   public async addNewTag(name?: string, path?: string): Promise<void> {
