@@ -1,6 +1,6 @@
 {
   "name": "jumper",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "CLI to jump to git projects from anywhere",
   "author": "",
   "license": "ISC",
